@@ -1,0 +1,11 @@
+*.class
+.classpath
+.project
+.settings/
+build/
+.gradle/
+/bin/
+/lib/
+/logs/
+.idea/
+xty-scheduler-task.iml

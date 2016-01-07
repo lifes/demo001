@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xty.st.mapper.RedMapper">
+	<!-- <cache /> -->
+	<select id="getRedsByUserid" resultType="Red">
+		select
+		id,
+		user_id,
+		red_name,
+		red_desc,
+		starttime,
+		endtime,
+		is_effective,
+		is_used,
+		red_type,
+		red_reduce,
+		red_projectcount
+		from xty_red
+		where user_id = #{user_id}
+	</select>
+	<insert id="insertRed" parameterType="Red">
+		insert into xty_red
+		(user_id, red_name, red_desc, starttime, endtime, is_effective,
+		is_used, red_type, red_reduce, red_projectcount)
+		values
+		(#{user_id},
+		#{red_name}, #{red_desc}, #{starttime}, #{endtime}, #{is_effective},
+		#{is_used}, #{red_type}, #{red_reduce},#{red_projectcount})
+	</insert>
+</mapper>

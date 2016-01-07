@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xty.st.mapper.RefundMapper">
+    <!-- <cache /> -->
+    <select id="getRefundDetails" resultType="RefundDetail">
+        select
+        pay.id  out_trade_no,
+        pay.trade_no  trade_no,
+        pay.trade_fee refund_fee
+        from xty_pay pay
+        left join xty_massage_precontract t
+        on pay.order_id = t.id
+        where
+        pay.refund_flag != 5
+        and t.flag = 3
+        order by pay.id
+    </select>
+    <select id="setRefundFlag" >
+        update xty_pay set refund_flag = 5
+        where id in
+        <foreach item="id" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+</mapper>
